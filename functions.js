@@ -57,7 +57,7 @@ const getLinks = (path) => {
   return array
 }
 
-validateLinks = (links) => {
+const validateLinks = (links) => {
   const arrPromisesAxios = links.map(link => {
     return axios.get(link.url)  
     .then((response) => {
