@@ -28,3 +28,8 @@
     url: 'https://www.youtube.com/watch?v=Lub5qOmY4JQ',
     text: 'recurso'
   }
+  {
+    file: './test/files/',
+    url: 'https://www.youtube.com/watch?v=Lub5qOmY4JQ',
+    text: 'recurso'
+  }
