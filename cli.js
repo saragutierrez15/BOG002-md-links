@@ -24,40 +24,38 @@ const argv = yargs
     .alias('help', 'h')
     .argv;
 if (!path) {
-    console.log('se debe ingresar una ruta valida')
+    console.log('enter a route')
 } else {
-    if (argv.validate) {
-        console.log('estoy validando')
+    if (argv.stats && argv.validate) {       
+        mdLinks(path, { validate: true })       
+            .then((data) => { 
+                const total = data.length               
+                const uniqueLink = [...new Set(data.map((link) => link.link))]
+                const Unique = uniqueLink.length
+                const searchbroken = data.filter((link) => link.statusText !== 'OK')
+                const broken = searchbroken.length
+                console.table({total, Unique, broken})
+            })
+    } else 
+    if (argv.validate) {        
         mdLinks(path, { validate: true })
             .then((links) => {
                 links.forEach(link => {
                     console.log(link.file, link.link, link.status, link.statusText);
                 })
             })
-
-    }
-    if (argv.stats) {
-        console.log('estoy haciendo estadisticas')
+    } else
+    if (argv.stats) {       
         mdLinks(path)
             .then((data) => {
-                const total = ('Total: ' + data.length)
+                const total = (data.length)
                 const uniqueLink = [...new Set(data.map((link) => link.url))]
-                const totalUnique = ('Unique: ' + uniqueLink.length)
-                console.log(total, totalUnique)
+                const Unique = (uniqueLink.length)
+                console.table({total, Unique})
             })
     }
-    if (argv.stats && argv.validate) {
-        console.log('estoy haciendo estadisticas y validate')
-        mdLinks(path, { validate: true })
-            .then((data) => {
-                const uniqueLink = [...new Set(data.map((link) => link.link))]
-                const totalUnique = uniqueLink.length
-                const broken = data.filter((link) => link.statusText !== 'OK')
-                console.log('Total: ' + data.length, 'Unique: ' + totalUnique, 'Broken: ' + broken.length)
-            })
-    }
-    if (!argv.validate && !argv.stats) {
-        console.log('No quiero validar')
+    
+    else {        
         mdLinks(path, { validate: false })
             .then(console.log)
     }

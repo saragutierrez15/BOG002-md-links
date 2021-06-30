@@ -31,7 +31,7 @@ const readFiles = (route) => {
       if (err) {
         console.log('No existen archivos validos')
         return
-      }     
+      }          
       resolve(data)
     });
   });
@@ -52,14 +52,13 @@ const getLinks = (path) => {
       }
       array.push(objectLinks)
     }    
-  });   
+  });  
   return array
 }
 const validateLinks = (links) => {
   const arrPromisesAxios = links.map(link => {
     return axios.get(link.url)  
-    .then((response) => {
-      //console.log({file: route, link: link.url,text: link.text, status:response.status, statusText: 'OK'})
+    .then((response) => {      
       return {
         file: route, 
         link: link.url,
@@ -68,8 +67,7 @@ const validateLinks = (links) => {
         statusText: 'OK'
       }      
     })
-    .catch((error) => {
-      //console.log({file: route, link: link.url, text: link.text,status:error.response.status, statusText: 'FAIL'})
+    .catch((error) => {    
       return {
         file: route, 
         link: link.url, 
@@ -79,7 +77,7 @@ const validateLinks = (links) => {
       }   
     })
   })  
-  return Promise.all(arrPromisesAxios)//.then((results) => results.forEach((result) => console.log(result))); 
+  return Promise.all(arrPromisesAxios) 
 }
 
 module.exports = {

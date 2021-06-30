@@ -1,8 +1,5 @@
 const { readFiles, getLinks, validateLinks } = require('./functions.js')
 
-//const route = '/home/user/Documentos/BOG002-md-links/README.md'
-
-
 const mdLinks = (path, options = { validate: false }) => {
   return readFiles(path)
     .then(getLinks)
@@ -17,7 +14,5 @@ const mdLinks = (path, options = { validate: false }) => {
       console.log('No se puede completar la funcion MDlinks')
     })
 }
-//mdLinks(route, { validate: true })
-//.then(console.log)
-//
+
 module.exports = { mdLinks }
