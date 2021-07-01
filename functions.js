@@ -6,24 +6,6 @@ const axios = require('axios');
 const route = './test/files/'
 
 
-//Estamos haciendo el array de rutas 
-files = fs.readdirSync(route);
-
-let filesArr = []
-files.forEach(file => {
-  if (path.extname(file) == ".md")
-    filesArr.push(path.resolve(route, file));
-})
-//console.log(filesArr)
-//const newFilesArr = filesArr.map(item=>{
-// console.log(item) 
-//})
-
-
-//volvemos las rutas en absolutas
-const cambiandoRutas = path.resolve(route, 'prueba.md')
-//console.log(cambiandoRutas)
-
 //leemos los documentos 
 const readFiles = (route) => {
   return new Promise((resolve) => {
